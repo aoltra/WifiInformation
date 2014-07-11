@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;  
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiInfo;
+import android.content.Context;
   
 public class WifiInformation extends CordovaPlugin {  
   
@@ -19,6 +20,8 @@ public class WifiInformation extends CordovaPlugin {
  	private interface WifiOp {
         void run() throws Exception;
     }
+
+    private Context context;
 
 	/**
 	 * Executes the request and returns whether the action was valid.
@@ -34,7 +37,7 @@ public class WifiInformation extends CordovaPlugin {
  		if (action.equals("getBSSID")) {
  			threadhelper( new WifiOp( ){
                 public void run() throws Exception {
-                    WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+                    WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
                     WifiInfo wifiInfo = wifiManager.getConnectionInfo();
                     String BSSID = wifiInfo.getBSSID();
                     callbackContext.success(BSSID);
@@ -55,6 +58,8 @@ public class WifiInformation extends CordovaPlugin {
      */
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     	super.initialize(cordova, webView);
+
+        context = cordova.getActivity().getApplicationContext();
     }
 
     /* 
