@@ -38,7 +38,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="WifiInformation">
-                <param name="android-package" value="org.uhuru.cordova.wifiinformation.WifiInformation"/>
+                <param name="android-package" value="com.uhuru.cordova.wifiinformation.WifiInformation"/>
             </feature>
         </config-file>
 
@@ -46,7 +46,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
         </config-file>
 
-        <source-file src="src/android/WifiInformation.java" target-dir="src/org/uhuru/cordova/WifiInformation/" />
+        <source-file src="src/android/WifiInformation.java" target-dir="src/com/uhuru/cordova/wifiinformation/" />
 
     </platform>
  
