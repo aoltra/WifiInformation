@@ -37,7 +37,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="NetworkStatus">
+            <feature name="WifiInformation">
                 <param name="android-package" value="org.uhuru.cordova.wifiinformation.WifiInformation"/>
             </feature>
         </config-file>
