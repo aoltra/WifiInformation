@@ -7,7 +7,8 @@ import org.apache.cordova.CordovaInterface;
 import org.json.JSONArray;  
 import org.json.JSONException;  
 import org.json.JSONObject;  
-import android.net.Wifi;
+import android.net.wifi.WifiManager;
+import android.net.wifi.WifiInfo;
   
 public class WifiInformation extends CordovaPlugin {  
   
