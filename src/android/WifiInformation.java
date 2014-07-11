@@ -34,7 +34,7 @@ public class WifiInformation extends CordovaPlugin {
  		if (action.equals("getBSSID")) {
  			threadhelper( new WifiOp( ){
                 public void run() throws Exception {
-                    WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+                    WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
                     WifiInfo wifiInfo = wifiManager.getConnectionInfo();
                     String BSSID = wifiInfo.getBSSID();
                     callbackContext.success(BSSID);
