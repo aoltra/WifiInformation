@@ -4,8 +4,11 @@ var wifiinfo = {
     cordova.exec(successCallback,  
         errorCallback,  
         "WifiInformation",  
-        "getBSSID"
+        "getBSSID",
+        []
     );  
       
   }  
 }  
+
+module.exports = wifiinfo;

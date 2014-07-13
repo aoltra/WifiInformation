@@ -10,12 +10,14 @@ import org.json.JSONObject;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiInfo;
 import android.content.Context;
+
+import android.util.Log;
   
 public class WifiInformation extends CordovaPlugin {  
   
 	private static final String LOG_TAG = "WifiInformation";
 
-	public static final String ACTION_SSID = "getBSSID"; 
+	public static final String ACTION_BSSID = "getBSSID"; 
 
  	private interface WifiOp {
         void run() throws Exception;
@@ -31,22 +33,29 @@ public class WifiInformation extends CordovaPlugin {
 	 * @param callbackContext	The callback context used when calling back into JavaScript.
 	 * @return True if the action was valid, false otherwise.
 	 */
-    public boolean execute(String action, final JSONArray args, final CallbackContext callbackContext) 
-    	throws JSONException {
+    public boolean execute(String action, final JSONArray args, final CallbackContext callbackContext) {
  		
- 		if (action.equals("getBSSID")) {
- 			threadhelper( new WifiOp( ){
-                public void run() throws Exception {
-                    WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                    WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-                    String BSSID = wifiInfo.getBSSID();
-                    callbackContext.success(BSSID);
-                }
-            },callbackContext);
-         
-        }
+        try {
+            
+            if (action.equals(ACTION_BSSID)) {
 
-        return false;
+                WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+                WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+                String BSSID = wifiInfo.getBSSID();
+                Log.d(LOG_TAG, "BSSID: " + BSSID);
+                callbackContext.success(BSSID);
+                        
+                return true;
+            
+            }
+
+            return false;
+        }
+        catch (Exception e) {
+
+            callbackContext.error(e.getMessage());
+            return false;
+        }
     }
 
     /**
@@ -62,18 +71,4 @@ public class WifiInformation extends CordovaPlugin {
         context = cordova.getActivity().getApplicationContext();
     }
 
-    /* 
-     * helper to execute functions async and handle the result codes
-     */
-    private void threadhelper(final WifiOp f, final CallbackContext callbackContext){
-        cordova.getThreadPool().execute(new Runnable() {
-            public void run() {
-                try {
-                    f.run();
-                } catch ( Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 }

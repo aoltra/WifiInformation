@@ -21,7 +21,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 xmlns:android="http://schemas.android.com/apk/res/android"
            id="com.uhuru.cordova.wifiinformation"
-      version="0.0.6">
+      version="0.1.0">
 
     <name>Wifi Information</name>
     <description>Cordova Wifi Information Plugin</description>
@@ -31,7 +31,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <issue></issue>
 
     <js-module src="www/wifiinfo.js" name="wifiinfo">
-        <clobbers target="navigator.wifiinfo" />
+        <clobbers target="wifiinfo" />
     </js-module>
 
     <!-- android -->
