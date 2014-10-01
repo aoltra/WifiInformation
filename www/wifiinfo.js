@@ -5,6 +5,7 @@ var wifiinfo = {
         errorCallback,  
         "WifiInformation",  
         "getBSSID",
+        "getSSID",
         []
     );  
       

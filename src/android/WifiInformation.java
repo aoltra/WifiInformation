@@ -17,7 +17,8 @@ public class WifiInformation extends CordovaPlugin {
   
 	private static final String LOG_TAG = "WifiInformation";
 
-	public static final String ACTION_BSSID = "getBSSID"; 
+	public static final String ACTION_BSSID = "getBSSID";
+    public static final String ACTION_SSID = "getSSID";
 
  	private interface WifiOp {
         void run() throws Exception;
@@ -37,16 +38,24 @@ public class WifiInformation extends CordovaPlugin {
  		
         try {
             
+            WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+            String info = "";
+            
             if (action.equals(ACTION_BSSID)) {
-
-                WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-                String BSSID = wifiInfo.getBSSID();
-                Log.d(LOG_TAG, "BSSID: " + BSSID);
-                callbackContext.success(BSSID);
+                info = wifiInfo.getBSSID();
+                Log.d(LOG_TAG, "BSSID: " + info);
+                callbackContext.success(info);
                         
                 return true;
+            }
             
+             if (action.equals(ACTION_SSID)) {
+                info = wifiInfo.getSSID();
+                Log.d(LOG_TAG, "SSID: " + info);
+                callbackContext.success(info);
+                        
+                return true;
             }
 
             return false;
